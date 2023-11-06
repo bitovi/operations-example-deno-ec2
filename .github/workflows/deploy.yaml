@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: deploy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.8
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc1
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
           aws_default_region: us-east-2
         #   dot_env: ${{ secrets.DOT_ENV }}
           app_port: 8000
-          stack_destroy: true
+          stack_destroy: false
