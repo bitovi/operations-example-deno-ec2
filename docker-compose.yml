@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  deno-app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DENO_URL=https://raw.githubusercontent.com/evbogue/deno-mini-chat/master/serve.js
