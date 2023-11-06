@@ -15,3 +15,4 @@ jobs:
           aws_default_region: us-east-2
         #   dot_env: ${{ secrets.DOT_ENV }}
           app_port: 8000
+          stack_destroy: false
