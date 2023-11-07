@@ -16,4 +16,6 @@ jobs:
           aws_default_region: us-east-2
           app_port: 8000
           stack_destroy: false
+
           tf_state_file_name_append: EC2
+          tf_state_bucket: EC2-deno-demo-bucket
