@@ -29,4 +29,4 @@ jobs:
         tf_state_file_name_append: ECS
         tf_state_bucket: ecs-deno-demo-bucket
 
-        tf_stack_destroy: true
+        tf_stack_destroy: false
