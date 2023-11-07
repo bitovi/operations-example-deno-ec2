@@ -18,4 +18,4 @@ jobs:
           stack_destroy: false
 
           tf_state_file_name_append: EC2
-          tf_state_bucket: EC2-deno-demo-bucket
+          tf_state_bucket: ec2-deno-demo-bucket

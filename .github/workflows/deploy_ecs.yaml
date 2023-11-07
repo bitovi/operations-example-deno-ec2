@@ -12,8 +12,8 @@ jobs:
       uses: bitovi/github-actions-deploy-ecs@main
       
       with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_TRAINING }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_TRAINING }}
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
         aws_default_region: us-east-2
 
         aws_ecs_enable: true
@@ -27,4 +27,4 @@ jobs:
         aws_r53_sub_domain_name: deno-demo
 
         tf_state_file_name_append: ECS
-        tf_state_bucket: ECS-deno-demo-bucket
+        tf_state_bucket: ecs-deno-demo-bucket
