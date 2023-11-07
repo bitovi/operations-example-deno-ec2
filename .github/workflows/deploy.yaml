@@ -6,6 +6,7 @@ on:
 jobs:
   EC2-Deploy:
     runs-on: ubuntu-latest
+    environment: EC2
     steps:
       - id: deploy
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
