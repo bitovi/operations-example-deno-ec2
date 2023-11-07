@@ -19,7 +19,3 @@ jobs:
 
           tf_state_file_name_append: EC2
           tf_state_bucket: ec2-deno-demo-bucket-mc
-
-          aws_r53_enable: true
-          domain_name: bitovi-sandbox.com
-          sub_domain: deno-demo-ec2

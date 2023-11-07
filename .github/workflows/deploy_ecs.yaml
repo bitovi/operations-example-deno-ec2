@@ -22,10 +22,6 @@ jobs:
         aws_ecs_cloudwatch_enable: true
         aws_ecs_cloudwatch_retention_days: 7
 
-        aws_r53_enable: true
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: deno-demo-ecs
-
         tf_state_file_name_append: ECS
         tf_state_bucket: ecs-deno-demo-bucket-mc
 
