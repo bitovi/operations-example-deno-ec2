@@ -11,11 +11,15 @@ jobs:
       - id: deploy
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
         with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-2
           app_port: 8000
           stack_destroy: false
 
           tf_state_file_name_append: EC2
           tf_state_bucket: ec2-deno-demo-bucket
+
+          aws_r53_enable: true
+          domain_name: bitovi-sandbox.com
+          sub_domain: deno-demo-ec2
