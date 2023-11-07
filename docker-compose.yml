@@ -2,7 +2,8 @@ version: '3'
 
 services:
   deno-app:
-    build: .
+    # build: .
+    image: bitovi/deno-demo:latest
     env_file: .env
     ports:
       - "8000:8000"

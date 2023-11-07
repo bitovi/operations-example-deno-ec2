@@ -1,4 +1,4 @@
-name: Basic deploy
+name: Deploy to EC2
 on:
   push:
     branches: [ main ]

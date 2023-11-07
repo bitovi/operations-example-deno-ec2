@@ -1,0 +1,25 @@
+name: Deploy to ECS
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-ecs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create an ECS-Fargate deploy
+      uses: bitovi/github-actions-deploy-ecs@v0.1.1
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-2
+
+        aws_ecs_enable: true
+        aws_ecs_app_image: bitovi/deno-demo:latest
+        aws_ecs_container_port: 8000
+        aws_ecs_cloudwatch_enable: true
+        aws_ecs_cloudwatch_retention_days: 7
+
+        aws_r53_enable: true
+        aws_r53_domain_name: bitovi-sandbox.com
+        aws_r53_sub_domain_name: deno-demo
