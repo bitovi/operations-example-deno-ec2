@@ -17,5 +17,3 @@ jobs:
           app_port: 8000
           stack_destroy: true
 
-          tf_state_file_name_append: EC2
-          tf_state_bucket: ec2-deno-demo-bucket-mc

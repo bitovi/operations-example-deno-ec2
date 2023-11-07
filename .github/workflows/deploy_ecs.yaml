@@ -1,7 +1,7 @@
 name: Deploy to ECS
-on:
-  push:
-    branches: [ main ]
+on: workflow_dispatch
+#   push:
+#     branches: [ main ]
 
 jobs:
   deploy-ecs:
@@ -21,8 +21,5 @@ jobs:
         aws_ecs_container_port: 8000
         aws_ecs_cloudwatch_enable: true
         aws_ecs_cloudwatch_retention_days: 7
-
-        tf_state_file_name_append: ECS
-        tf_state_bucket: ecs-deno-demo-bucket-mc
 
         tf_stack_destroy: true
