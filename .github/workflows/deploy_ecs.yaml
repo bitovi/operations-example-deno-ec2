@@ -25,3 +25,5 @@ jobs:
         aws_r53_enable: true
         aws_r53_domain_name: bitovi-sandbox.com
         aws_r53_sub_domain_name: deno-demo
+
+        tf_state_file_name_append: ECS
