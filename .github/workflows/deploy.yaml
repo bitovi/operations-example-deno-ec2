@@ -17,6 +17,6 @@ jobs:
           aws_default_region: us-east-2
           app_port: 8000
 
-          stack_destroy: true
+          stack_destroy: false
 
           aws_resource_identifier: deno-ec2
