@@ -1,4 +1,4 @@
-name: Deploy to EC2 & ECS
+name: Deploy to EC2 and ECS
 on:
   push:
     branches: [ main ]
