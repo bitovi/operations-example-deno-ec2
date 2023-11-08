@@ -16,7 +16,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-2
           app_port: 8000
-          
+
           stack_destroy: false
 
           aws_resource_identifier: deno-ec2
@@ -35,8 +35,12 @@ jobs:
 
         aws_ecs_enable: true
         aws_ecs_app_image: bitovi/deno-demo:latest
+        
         aws_ecs_task_cpu: 2048
         aws_ecs_task_mem: 6144
+
+        aws_ecs_container_mem: 6144
+        aws_ecs_container_cpu: 2048
         
         aws_ecs_cloudwatch_enable: true
         aws_ecs_cloudwatch_retention_days: 7
