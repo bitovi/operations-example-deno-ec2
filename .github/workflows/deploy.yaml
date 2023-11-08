@@ -20,3 +20,36 @@ jobs:
           stack_destroy: false
 
           aws_resource_identifier: deno-ec2
+
+  ECS-Deploy:
+    runs-on: ubuntu-latest
+    environment: ECS
+    steps:
+      - name: Deploy to ECS
+        id: ecs
+        uses: bitovi/github-actions-deploy-ecs@main
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-2
+
+          aws_ecs_enable: true
+          aws_ecs_app_image: bitovi/deno-demo:latest
+
+          aws_ecs_task_cpu: 2048
+          aws_ecs_task_mem: 6144
+
+          aws_ecs_container_mem: 6144
+          aws_ecs_container_cpu: 2048
+          
+          aws_ecs_cloudwatch_enable: true
+          aws_ecs_cloudwatch_retention_days: 7
+
+          aws_ecs_container_port: 8000
+          aws_ecs_lb_port: 8000
+
+          tf_stack_destroy: false
+
+          aws_resource_identifier: deno-ecs
+        
+        
