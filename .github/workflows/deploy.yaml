@@ -16,5 +16,3 @@ jobs:
           aws_default_region: us-east-2
           app_port: 8000
           stack_destroy: false
-          repo_env: repo_env
-
