@@ -8,24 +8,26 @@ jobs:
     runs-on: ubuntu-latest
     environment: EC2
     steps:
-      - id: deploy
+      - name: Deploy to EC2
+        id: ec2
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-2
           app_port: 8000
+          
           stack_destroy: false
 
           aws_resource_identifier: deno-ec2
 
-  deploy-ecs:
+  ECS-Deploy:
     runs-on: ubuntu-latest
     environment: ECS
     steps:
     - name: Create an ECS-Fargate deploy
+      id: ecs
       uses: bitovi/github-actions-deploy-ecs@main
-      
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
