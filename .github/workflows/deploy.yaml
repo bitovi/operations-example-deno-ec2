@@ -6,7 +6,9 @@ on:
 jobs:
   EC2-Deploy:
     runs-on: ubuntu-latest
-    environment: EC2
+    environment: 
+      name: EC2
+      url: ${{ steps.ec2.outputs.vm_url }}
     steps:
       - name: Deploy to EC2
         id: ec2
@@ -30,7 +32,9 @@ jobs:
 
   ECS-Deploy:
     runs-on: ubuntu-latest
-    environment: ECS
+    environment: 
+      name: ECS
+      url: ${{ steps.ecs.outputs.ecs_dns_record }}
     steps:
       - name: Deploy to ECS
         id: ecs
@@ -57,7 +61,7 @@ jobs:
           aws_ecs_lb_port: 8000
           aws_ecs_lb_redirect_enable: true
 
-          tf_stack_destroy: true
+          #tf_stack_destroy: true
 
           aws_resource_identifier: deno-ecs
           aws_r53_enable: true
