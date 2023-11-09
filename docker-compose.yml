@@ -2,8 +2,8 @@ version: '3'
 
 services:
   deno-app:
-    # build: .
-    image: bitovi/deno-demo:latest
+    build: .
+    # image: bitovi/deno-demo:latest
     # env_file: .env
     environment:
       DENO_URL: https://raw.githubusercontent.com/evbogue/deno-visits/master/serve.js
