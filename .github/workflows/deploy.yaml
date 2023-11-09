@@ -52,8 +52,8 @@ jobs:
           aws_ecs_task_cpu: 2048
           aws_ecs_task_mem: 4096
 
-          #aws_ecs_container_cpu: 2048
-          #aws_ecs_container_mem: 6144
+          aws_ecs_container_cpu: 2048
+          aws_ecs_container_mem: 6144
           
           aws_ecs_cloudwatch_enable: true
           aws_ecs_cloudwatch_retention_days: 7
