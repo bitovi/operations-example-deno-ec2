@@ -17,13 +17,11 @@ There are two Actions used in this Ops Repo:
 
 They are two different ways to accomplish the same thing: Hosting your Deno app in the cloud, for public access.
 
-We provide this Operations Repo as an example of how to use either Action for your app.
-
-
+We provide this Operations Repo as an example of how to use either Action for your Deno app.
 
 ## How does it work?
 
-You might notice there isn't any application code in this repo. That's intentional! **Deno** apps are capable of being hosted by simply providing the URL of their "main" code to the Deno runner.
+You might notice there isn't any application code in this repo. That's intentional! **Deno** apps are capable of being served by simply providing the URL of their "main" code to the Deno runner.
 
 So that's what we've done in this Operations Repo. The `Dockerfile` and `docker-compose.yml` are fed into Bitovi's open-source GitHub Actions, which take care of the provisining and deployment into AWS resources.
 
@@ -31,7 +29,19 @@ All you need is an AWS account, and your [Deno][1] code.
 
 ### The Dockerfile
 
-The Dockerfile is quite simple. It starts `FROM` the latest Deno runner image.
+The Dockerfile is quite simple.
+
+It starts `FROM` the latest Deno runner image.
+
+`EXPOSE` the port specified by the app code, in this case `8000`.
+
+A default `ENV` var is set as the URL of the app's main code file. This is used by the Deno runner to start the app. 
+
+It can be overridden with any other app's URL at build time!
+
+### The docker-compose file
+
+
 
 
 
