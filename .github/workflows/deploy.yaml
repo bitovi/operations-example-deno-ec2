@@ -16,10 +16,10 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-2
+          aws_default_region: us-east-1
           app_port: 8000
 
-          stack_destroy: true
+          #stack_destroy: true
 
           aws_resource_identifier: deno-ec2
           aws_r53_enable: true
@@ -43,7 +43,7 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-2
+          aws_default_region: us-east-1
 
           aws_ecs_enable: true
           aws_ecs_app_image: bitovi/deno-demo:latest
@@ -61,7 +61,7 @@ jobs:
           aws_ecs_lb_port: 8000
           aws_ecs_lb_redirect_enable: true
 
-          tf_stack_destroy: true
+          #tf_stack_destroy: true
 
           aws_resource_identifier: deno-ecs
           aws_r53_enable: true
