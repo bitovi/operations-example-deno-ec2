@@ -70,3 +70,5 @@ jobs:
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: deno-ecs
           aws_r53_enable_cert: true
+
+          env_repo: repo_env
