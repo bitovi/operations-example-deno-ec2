@@ -1,4 +1,5 @@
 # operations-example-deno-AWS
+
 Deploy a [Deno][1] app to AWS
 
 ## What is this?
@@ -27,26 +28,26 @@ So that's what we've done in this Operations Repo. The `Dockerfile` and `docker-
 
 All you need is an AWS account, and your [Deno][1] code.
 
-### The Dockerfile
+### The `Dockerfile`
 
-The Dockerfile is quite simple.
+The Dockerfile is quite simple:
 
-It starts `FROM` the latest Deno runner image.
+- It starts `FROM` the latest Deno runner image.
+- `EXPOSE` the port specified by the app code, in this case `8000`.
+- A default `ENV` var is set as the URL of the app's main code file. This is used by the Deno runner to start the app.
+  - It can be overridden with any other app's URL at build- and run-time, without changing the Dockerfile, by using the `-e "DENO_URL=<your deno url>"` flag when running `docker build`.
 
-`EXPOSE` the port specified by the app code, in this case `8000`.
+### The `docker-compose` file
 
-A default `ENV` var is set as the URL of the app's main code file. This is used by the Deno runner to start the app. 
+The `docker-compose.yml` file is used by the [Deploy Docker to EC2][2] Action to spin up a VM and launch the app.
 
-It can be overridden with any other app's URL at build time!
+## Overriding the `DENO_URL` environment variable
 
-### The docker-compose file
+We've provided three variations of how override the `DENO_URL` environment variable:
 
-
-
-
-
-
-
+1. Setting the `DENO_URL` environment variable in the `docker-compose.yml` file.
+1. Using the `-e "DENO_URL=<your deno url>"` flag when running `docker-compose up`, or when running `docker-compose build`.
+1. Providing a `.env` file with the `DENO_URL` environment variable.
 
 [1]: https://deno.com/
 [2]: https://github.com/bitovi/github-actions-deploy-docker-to-ec2
