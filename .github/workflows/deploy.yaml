@@ -61,7 +61,7 @@ jobs:
           aws_ecs_container_port: 8000
           aws_ecs_lb_port: 8000
           aws_ecs_lb_redirect_enable: true
-
+          aws_ecs_assign_public_ip: true
           #tf_stack_destroy: true
           tf_state_bucket_destroy: true
 
