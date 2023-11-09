@@ -41,8 +41,7 @@ jobs:
     steps:
       - name: Deploy to ECS
         id: ecs
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@commons-testing
+        uses: bitovi/github-actions-deploy-ecs@v0.1.2
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}

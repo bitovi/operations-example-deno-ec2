@@ -35,7 +35,7 @@ The Dockerfile is quite simple:
 - It starts `FROM` the latest Deno runner image.
 - `EXPOSE` the port specified by the app code, in this case `8000`.
 - A default `ENV` var is set as the URL of the app's main code file. This is used by the Deno runner to start the app.
-  - It can be overridden with any other app's URL at build- and run-time, without changing the Dockerfile, by using the `-e "DENO_URL=<your deno url>"` flag when running `docker build`.
+- The env var can be overridden with any other app's URL at build- and run-time, without changing the Dockerfile  
 
 ### The `docker-compose` file
 
