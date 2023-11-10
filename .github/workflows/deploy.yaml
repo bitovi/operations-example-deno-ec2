@@ -30,7 +30,7 @@ jobs:
           aws_r53_enable: true
           domain_name: bitovi-sandbox.com
           sub_domain: deno-ec2
-          enable_cert: true
+          aws_r53_enable_cert: true
 
   ECS-Deploy:
     runs-on: ubuntu-latest
