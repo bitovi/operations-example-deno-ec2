@@ -16,21 +16,20 @@ jobs:
         id: ec2
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
         with:
+          # To SPIN UP use false, to DESTROY use true
+          # tf_state_xyz only takes effect when stack_destroy is true.
+          # stack_destroy: true
+          tf_state_bucket_destroy: true
+          
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
           app_port: 8000
 
-          stack_destroy: true
-          tf_state_bucket_destroy: true
-
           aws_resource_identifier: deno-demo-ec2
           aws_r53_enable: true
-          #aws_r53_domain_name: bitovi-sandbox.com
           domain_name: bitovi-sandbox.com
-          #aws_r53_sub_domain_name: deno-ec2
           sub_domain: deno-ec2
-          #aws_r53_enable_cert: true
           enable_cert: true
 
   ECS-Deploy:
@@ -43,6 +42,11 @@ jobs:
         id: ecs
         uses: bitovi/github-actions-deploy-ecs@v0.1.2
         with:
+          # To SPIN UP use false, to DESTROY use true
+          # tf_state_xyz only takes effect when tf_stack_destroy is true.
+          # tf_stack_destroy: true
+          tf_state_bucket_destroy: true
+        
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
@@ -63,8 +67,6 @@ jobs:
           aws_ecs_lb_port: 8000
           aws_ecs_lb_redirect_enable: true
           aws_ecs_assign_public_ip: true
-          tf_stack_destroy: true
-          tf_state_bucket_destroy: true
 
           aws_resource_identifier: deno-demo-ecs
           aws_r53_enable: true
