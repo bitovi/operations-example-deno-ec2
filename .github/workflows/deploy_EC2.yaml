@@ -36,7 +36,7 @@ jobs:
           aws_default_region: us-east-1
 
           # Set to the port your app/container is listening on
-          app_port: 8000
+          aws_elb_app_port: 8000
 
           # Ensures no collision with other resources from this repo/workflow
           aws_resource_identifier: deno-demo-ec2
