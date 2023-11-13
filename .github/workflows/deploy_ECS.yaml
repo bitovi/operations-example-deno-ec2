@@ -10,15 +10,25 @@ name: Deploy to ECS
 on:
   push:
     branches: [ main ]
+
+    # DON'T run if only either of these files are changed.
+    # If any other files are also changed, the workflow *will* run.
     paths-ignore:
       - README.md
+      - .github/workflows/deploy_EC2.yaml
 
 jobs:
   ECS-Deploy:
     runs-on: ubuntu-latest
-    environment: 
-      name: ECS
-      url: ${{ steps.ecs.outputs.ecs_dns_record }}
+    # environment: 
+    #   name: ECS
+    #   url: ${{ steps.ecs.outputs.ecs_dns_record }}
+    
+    # ensures last-in-first-out ordering
+    concurrency:
+      group: ecs
+      cancel-in-progress: true
+
     steps:
       - name: Deploy to ECS
         id: ecs
@@ -28,7 +38,8 @@ jobs:
           # tf_state_bucket_destroy only takes effect when tf_stack_destroy is true.
           # tf_stack_destroy: true
           tf_state_bucket_destroy: true
-        
+
+          # These are required UNLESS you add an AWS login action to your workflow.
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1

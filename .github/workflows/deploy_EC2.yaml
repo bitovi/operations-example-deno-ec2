@@ -10,8 +10,12 @@ name: Deploy to EC2
 on:
   push:
     branches: [ main ]
+
+    # DON'T run if only either of these files are changed.
+    # If any other files are also changed, the workflow *will* run.
     paths-ignore:
       - README.md
+      - .github/workflows/deploy_ECS.yaml
 
 jobs:
   EC2-Deploy:
@@ -19,6 +23,12 @@ jobs:
     # environment: 
     #   name: EC2
     #   url: ${{ steps.ec2.outputs.vm_url }}
+
+    # ensures last-in-first-out ordering
+    concurrency:
+      group: ec2
+      cancel-in-progress: true
+    
     steps:
       - name: Deploy to EC2
         id: ec2
