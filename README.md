@@ -14,7 +14,7 @@ There are two independent Actions used in this Ops Repo, providing two different
 | [Deploy Docker to EC2][2]  | <img src="https://github.com/bitovi/operations-example-deno-ec2/assets/8335079/1aaa61a6-e8fc-42b5-b1c8-4466840e6126" height="25%" width="25%" /> |
 | [Deploy Docker to ECS][3]  | <img src="https://github.com/bitovi/operations-example-deno-ec2/assets/8335079/bab32753-c6d8-49ba-a5a3-e461ca1162a9" height="25%" width="25%"> |
 
-We provide this Operations Repo as an example of how to use either Action for your Deno app. In a real-world scenario, you'd pick one.
+We provide this Operations Repo as an example of how to use either Action for your Deno app. In a real-world scenario, you'd probably only pick one.
 
 ## How does it work?
 
