@@ -6,7 +6,7 @@
 # - https://github.com/bitovi/github-actions-deploy-ecs
 #
 ############################################################
-name: Deploy to EC2 and ECS
+name: Deploy to ECS
 on:
   push:
     branches: [ main ]
@@ -14,40 +14,6 @@ on:
       - README.md
 
 jobs:
-  EC2-Deploy:
-    runs-on: ubuntu-latest
-    environment: 
-      name: EC2
-      url: ${{ steps.ec2.outputs.vm_url }}
-    steps:
-      - name: Deploy to EC2
-        id: ec2
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.0
-        with:
-          # To SPIN UP use false, to DESTROY use true
-          # tf_state_bucket_destroy only takes effect when stack_destroy is true.
-          # stack_destroy: true
-          tf_state_bucket_destroy: true
-
-          # These are required UNLESS you add an AWS login action to your workflow.
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          
-          aws_default_region: us-east-1
-
-          # Set to the port your app/container is listening on
-          app_port: 8000
-
-          # Ensures no collision with other resources from this repo/workflow
-          aws_resource_identifier: deno-demo-ec2
-
-          # Turn on Route53 DNS
-          # Requires configuring R53 in your AWS account.
-          aws_r53_enable: true
-          domain_name: bitovi-sandbox.com
-          sub_domain: deno-ec2
-          aws_r53_enable_cert: true
-
   ECS-Deploy:
     runs-on: ubuntu-latest
     environment: 
@@ -101,5 +67,5 @@ jobs:
           aws_r53_enable_cert: true
 
           # A file in the repo with Env Vars. `repo_env` is default, can be anything.
-          # Can leave undefined if file is `repo_env` (as in the EC2 job above).
+          # Can leave undefined if file is `repo_env` (as in the EC2 job in this repo).
           env_repo: repo_env
