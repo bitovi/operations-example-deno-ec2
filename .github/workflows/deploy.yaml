@@ -22,14 +22,14 @@ jobs:
     steps:
       - name: Deploy to EC2
         id: ec2
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.0
         with:
           # To SPIN UP use false, to DESTROY use true
           # tf_state_bucket_destroy only takes effect when stack_destroy is true.
           # stack_destroy: true
           tf_state_bucket_destroy: true
 
-          # These are required UNLESS you add an aws login action to your workflow.
+          # These are required UNLESS you add an AWS login action to your workflow.
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           
@@ -69,24 +69,23 @@ jobs:
 
           # Why is this here in an ECS action?
           # You can knock down the ECS resources without destroying the whole stack.
-          # It currently must be set `true` here, but will be changed to default:true in a future release.
+          # It currently must be set `true` here, but will be changed to `default:true` in a future release.
           aws_ecs_enable: true
 
           # The image(s) to launch. Must be pre-built.
-          # Comma-separate multiple values.
+          # Comma-separate multiple values. Multiple containers will each live in their own task.
+          # There is an advanced use case to combine them. Contact Bitovi for info on this!
           aws_ecs_app_image: bitovi/deno-demo:latest
 
           # If using multiple containers, comma-separate the values, in the order defined in `aws_ecs_app_image`.
           aws_ecs_task_cpu: 2048
           aws_ecs_task_mem: 4096
-
-          aws_ecs_container_cpu: 2048
-          aws_ecs_container_mem: 4096
-          
+  
           aws_ecs_cloudwatch_enable: true
           aws_ecs_cloudwatch_retention_days: 7
 
-          # set to the port your app/container is listening on
+          # Set to the port your app/container is listening on
+          # If using multiple containers, comma-separate the values, in the order defined in `aws_ecs_app_image`.
           aws_ecs_container_port: 8000
           aws_ecs_lb_port: 8000
           aws_ecs_lb_redirect_enable: true
@@ -101,6 +100,6 @@ jobs:
           aws_r53_sub_domain_name: deno-ecs
           aws_r53_enable_cert: true
 
-          # file in the repo with Env Vars. `repo_env` is default, can be anything.
-          # Can leave undefined if file is `repo_env`.
+          # A file in the repo with Env Vars. `repo_env` is default, can be anything.
+          # Can leave undefined if file is `repo_env` (as in the EC2 job above).
           env_repo: repo_env
