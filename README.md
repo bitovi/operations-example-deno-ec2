@@ -24,14 +24,14 @@ So that's what we've done in this Operations Repo. The `Dockerfile` and `docker-
 
 Alternatively, you can use these Actions in the same repo as your application code, which will result in your app deploying on any push to the branches you've configured!
 
-All you need is an AWS account and your [Deno][1] code.
+All you need is [an AWS account](https://aws.amazon.com/free) and your [Deno][1] code.
 
 ### The `Dockerfile`
 
 The Dockerfile is quite simple:
 
 - It starts `FROM` the latest Deno runner image.
-- `EXPOSE` the port specified by the app code, in this case `8000`.
+- `EXPOSE` the port specified by your app code, in this case `8000`.
 - A default `ENV` var is set as the URL of the app's main code file. The Deno runner uses this to start the app.
 - The env var can be overridden with any other app's URL at build- or run-time, without changing the Dockerfile. In this way, this ops repo can be used to deploy _any_ Deno app!
 
@@ -39,12 +39,14 @@ The Dockerfile is quite simple:
 
 The `docker-compose.yml` file is used by the [Deploy Docker to EC2][2] Action to spin up a VM and launch the app. It isn't needed for the ECS action: that Action is driven purely from [the Workflow's inputs][4].
 
+In fact, you could drive your ECS deployment from a repo with no app code, and only the Workflow!
+
 ## Overriding the `DENO_URL` environment variable
 
 We've provided three variations of how to override the `DENO_URL` environment variable:
 
 1. Set the `DENO_URL` environment variable in the `docker-compose.yml` file.
-1. Provide a `.env` file with the `DENO_URL` environment variable.
+1. Provide a `repo_env` file with the `DENO_URL` environment variable.
 
 For local development: Use the `-e "DENO_URL=<your deno url>"` flag when running your Docker/docker-compose commands.
 
@@ -53,3 +55,17 @@ For local development: Use the `-e "DENO_URL=<your deno url>"` flag when running
 [2]: https://github.com/bitovi/github-actions-deploy-docker-to-ec2
 [3]: https://github.com/bitovi/github-actions-deploy-ecs
 [4]: .github/workflows/deploy.yaml#L45
+
+## Deploying and Destroying your Cloud Infrastructure
+
+There is one variable to consider when deploying and destroying your AWS deployment: `stack_destroy` in the EC2 workflow, and `tf_stack_destroy` in the ECS workflow.
+
+> These variables will be named consistently in upcoming releases!
+
+In either case, this is the one variable that triggers deploying and destroying the environment.
+
+If `[tf_]stack_destroy` is `false`, the environment will be provisioned and your app will be deployed.
+
+If it is `true`, the environment and application will be **destroyed**.
+
+This mechanism enables a **GitOps** workflow: the state of the environment is determined by the content of the code, and changes to the code trigger changes in the environment.
