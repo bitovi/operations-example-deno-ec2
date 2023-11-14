@@ -33,7 +33,7 @@ The Dockerfile is quite simple:
 - It starts `FROM` the latest Deno runner image.
 - `EXPOSE` the port specified by your app code, in this case `8000`.
 - A default `ENV` var is set as the URL of the app's main code file. The Deno runner uses this to start the app.
-- The env var can be overridden with any other app's URL at build- or run-time, without changing the Dockerfile. In this way, this ops repo can be used to deploy _any_ Deno app!
+- The env var can be overridden with any other app's URL at build or run-time, without changing the Dockerfile. In this way, this ops repo can be used to deploy _any_ Deno app!
 
 ### The `docker-compose` file
 
@@ -52,13 +52,11 @@ For local development: Use the `-e "DENO_URL=<your deno url>"` flag when running
 
 ## Deploying and Destroying your Cloud Infrastructure
 
-There is one variable to consider when deploying and destroying your AWS deployment: `stack_destroy` in the EC2 workflow, and `tf_stack_destroy` in the ECS workflow.
+There is one variable to consider when deploying and destroying your AWS deployment: `tf_stack_destroy`.
 
-> These variables will be named consistently in upcoming releases!
+This is the one variable that triggers deploying and destroying the environment.
 
-In either case, this is the one variable that triggers deploying and destroying the environment.
-
-If `[tf_]stack_destroy` is `false`, the environment will be provisioned and your app will be deployed.
+If `tf_stack_destroy` is `false`, the environment will be provisioned and your app will be deployed.
 
 If it is `true`, the environment and application will be **destroyed**.
 
