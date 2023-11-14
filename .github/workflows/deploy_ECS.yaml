@@ -76,7 +76,9 @@ jobs:
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: deno-ecs
           aws_r53_enable_cert: true
-
+          # Option to create a certificate for the newly created sub-domain
+          aws_r53_create_sub_cert: true
+          
           # A file in the repo with Env Vars. `repo_env` is default, can be anything.
           # Can leave undefined if file is `repo_env` (as in the EC2 job in this repo).
           env_repo: repo_env

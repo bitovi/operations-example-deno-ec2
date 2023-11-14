@@ -54,6 +54,8 @@ jobs:
           # Turn on Route53 DNS
           # Requires configuring R53 in your AWS account.
           aws_r53_enable: true
-          domain_name: bitovi-sandbox.com
-          sub_domain: deno-ec2
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: deno-ec2
           aws_r53_enable_cert: true
+          # Option to create a certificate for the newly created sub-domain
+          aws_r53_create_sub_cert: true
